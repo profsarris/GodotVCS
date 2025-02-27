@@ -1,0 +1,30 @@
+[gd_scene load_steps=8 format=3 uid="uid://4esxwob35ae8"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_wbv5m"]
+[ext_resource type="Script" path="res://camera_pivot.gd" id="2_7vtqo"]
+[ext_resource type="Script" path="res://collision_shape_3d.gd" id="2_oqq2y"]
+[ext_resource type="Script" path="res://mesh_instance_3d.gd" id="3_y1giu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3fcun"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_sia1y"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ujtex"]
+albedo_color = Color(0.545098, 0.184314, 1, 1)
+
+[node name="player" type="CharacterBody3D"]
+script = ExtResource("1_wbv5m")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_3fcun")
+script = ExtResource("2_oqq2y")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("BoxMesh_sia1y")
+surface_material_override/0 = SubResource("StandardMaterial3D_ujtex")
+script = ExtResource("3_y1giu")
+
+[node name="CameraPivot" type="Node3D" parent="."]
+script = ExtResource("2_7vtqo")
+
+[node name="Camera3D" type="Camera3D" parent="CameraPivot"]

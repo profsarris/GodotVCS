@@ -1,0 +1,27 @@
+[gd_scene load_steps=7 format=3 uid="uid://bmpf1rmo3f1ju"]
+
+[ext_resource type="Script" path="res://nomcube.gd" id="1_7dfe7"]
+[ext_resource type="Script" path="res://collision_shape_3d.gd" id="2_yiu7c"]
+[ext_resource type="Script" path="res://mesh_instance_3d.gd" id="3_s6rfq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yb463"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3xpos"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_36r6w"]
+albedo_color = Color(0.0470588, 0.698039, 0.145098, 1)
+
+[node name="nomcube" type="Area3D"]
+script = ExtResource("1_7dfe7")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("BoxShape3D_yb463")
+script = ExtResource("2_yiu7c")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("BoxMesh_3xpos")
+surface_material_override/0 = SubResource("StandardMaterial3D_36r6w")
+script = ExtResource("3_s6rfq")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
